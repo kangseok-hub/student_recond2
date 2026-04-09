@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-rose-50: #fff1f2;
+  --color-rose-100: #ffe4e6;
+  --color-rose-500: #f43f5e;
+  --color-rose-700: #be123c;
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-500: #10b981;
+  --color-emerald-700: #047857;
+}
+
+@layer base {
+  .prose h1 {
+    @apply text-4xl font-black mb-10 pb-4;
+    color: #1e3a8a !important; /* blue-900 */
+    border-bottom: 4px solid #2563eb !important; /* blue-600 */
+  }
+  .prose h2 {
+    @apply text-2xl font-bold mt-16 mb-8 flex items-center gap-2 pl-4 py-4 rounded-r-lg;
+    color: #1f2937 !important; /* gray-800 */
+    border-left: 4px solid #3b82f6 !important; /* blue-500 */
+    background-color: #eff6ff !important; /* blue-50 */
+    line-height: 1.4;
+  }
+  .prose h3 {
+    @apply text-xl font-bold mt-10 mb-5 flex items-center gap-2 py-2;
+    color: #1e40af !important; /* blue-800 */
+    line-height: 1.4;
+  }
+  .prose h3::before {
+    content: "▹";
+    @apply font-black;
+    color: #3b82f6 !important; /* blue-500 */
+  }
+  .prose p {
+    @apply mb-6 leading-loose text-base;
+    color: #374151 !important; /* gray-700 */
+  }
+  .prose ul {
+    @apply list-none pl-0 space-y-4 mb-8;
+  }
+  .prose li {
+    @apply relative pl-8 text-base leading-relaxed mb-2;
+    color: #374151 !important; /* gray-700 */
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+  }
+  .prose li::before {
+    content: "✓";
+    @apply absolute left-0 font-black;
+    color: #2563eb !important; /* blue-600 */
+    top: 0.2em;
+  }
+  .prose hr {
+    @apply my-12;
+    border-top: 1px solid #e5e7eb !important; /* gray-200 */
+  }
+  .prose strong {
+    @apply font-bold px-1 rounded inline-block;
+    color: #1e3a8a !important; /* blue-900 */
+    background-color: #eff6ff !important; /* blue-50 */
+    line-height: 1.4;
+    margin-bottom: 0.2em;
+  }
+  .prose blockquote {
+    @apply pl-6 italic my-8 py-4 rounded-r-lg;
+    border-left: 4px solid #bfdbfe !important; /* blue-200 */
+    color: #4b5563 !important; /* gray-600 */
+    background-color: #f9fafb !important; /* gray-50 */
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-200 rounded-full hover:bg-gray-300 transition-colors;
+}
+
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  /* Hide everything except the report content */
+  body > *:not(#pdf-report-content-wrapper) {
+    display: none !important;
+  }
+  
+  #pdf-report-content-wrapper {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #pdf-report-content {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: static !important;
+    width: 100% !important;
+    padding: 25mm 20mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Ensure Markdown content looks good on print */
+  .prose {
+    max-width: none !important;
+    color: black !important;
+  }
+  
+  .prose h2 {
+    margin-top: 2em !important;
+    border-bottom: 1pt solid #eee !important;
+    padding-bottom: 0.5em !important;
+    color: #1e3a8a !important; /* blue-900 */
+  }
+
+  .prose h3 {
+    margin-top: 1.5em !important;
+    color: #1e40af !important; /* blue-800 */
+  }
+
+  .prose p, .prose li {
+    margin-bottom: 1em !important;
+    text-align: justify;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Avoid page breaks inside sections if possible */
+  .prose h2, .prose h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}
